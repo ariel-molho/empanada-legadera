@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Gilda+Display);
+
+.notFound-title {
+  text-align: center;
+  font-family: 'Gilda Display', serif;
+  font-size: 95px;
+  font-style: italic;
+  margin: 3rem 0 1rem 0;
+  animation: noise 1s linear infinite;
+  overflow: default;
+}
+
+@keyframes noise {
+  0%, 3%, 5%, 42%, 44%, 100% {opacity: 1; transform: scaleY(1);}  
+  4.3% {opacity: 1; transform: scaleY(1.7); color: red}
+  43% {opacity: 1; transform: scaleX(1.5); color: blue}
+}
+
+.notFound-img-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.notFound-img{
+  border-radius: 5rem;
+}
+
+.info{
+  text-align: center;
+  font-family: 'Gilda Display', serif;
+  font-size: 2rem;
+  font-style: italic;
+}

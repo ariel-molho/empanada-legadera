@@ -1,0 +1,27 @@
+.login-title{
+  text-align: center;
+  font-size: 3rem;
+  margin: 3rem 0 1rem 0;
+}
+
+.logo-img-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.logo-img{
+  border-radius: 5rem;
+}
+
+.login-button-container, .register-button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.login-button, .register-button{
+  width: 110px;
+  margin: .5rem 0;
+}

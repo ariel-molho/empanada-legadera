@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from './containers/LandingPage/LandingPage';
+import Register from './containers/Register/Register';
+import NotFound from './containers/NotFound/NotFound';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage/>} />
+        <Route exact path="/registro" element={<Register/>} />
+          {/* <Route path="/historial" element={<p>OrderHistory</p>} />
+          <Route path="/nuevo-pedido" element={<p>NewOrder</p>} />
+          <Route path="/editar-pedido/:id" element={<p>EditOrder</p>} /> */}
+        <Route path="*" element={<NotFound/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
+/*
+https://www.youtube.com/watch?v=Y9-UkL6ent4&ab_channel=FaztCode
+https://www.youtube.com/watch?v=1rLBjRF0ep0&ab_channel=FaztCode
+*/
