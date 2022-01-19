@@ -1,72 +1,131 @@
-import React from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Form, Input, Button, Alert } from 'antd';
 import 'antd/dist/antd.css';
+import { Modal } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Register.css';
+import { registerUser } from '../../sevices/utils';
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-  const onRegister = (values) => {
-    console.log('Success:', values);
+  let navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [newUser, setNewUser] = useState({
+    username: "",
+    password: ""
+  });
+
+  const formValues = (values) => {
+    if (values.username) {
+      setNewUser({ ...newUser,
+        username: values.username
+      });
+    }
+    else {
+      setNewUser({ ...newUser,
+        password: values.password
+      });
+    }
+  }
+
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setShowAlert(false);;
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showAlert])
+
+  const onRegister = async () => {
+    const response = await registerUser(newUser.username, newUser.password);
+    if (response.hasOwnProperty("message")) {
+      // console.log(response.message);//para control
+      setShowAlert(true);
+    }
+    if (response.hasOwnProperty("user")) {
+      // console.log(response.user);//para control
+      setShow(false);
+      navigate("/historial");
+    }
   };
 
+  const closeAlert = () => {
+    setShowAlert(false)
+  }
+
+
+  
   return (
-    <div>
-      <h1 className='register-title'>Empanada Legadera</h1>
-      <h2 className='register-subTitle'>Nuevo Usuario</h2>
-      <div>
-        <Form
-          name="basic"
-          layout="vertical"
-          labelCol={{
-            xs: { span: 2 },
-            sm: { offset: 6, span: 12 },
-            md: { offset: 7, span: 10 },
-            lg: { offset: 8, span: 8 }
-          }}
-          wrapperCol={{
-            xs: { span: 2 },
-            sm: { offset: 6, span: 12 },
-            md: { offset: 7, span: 10 },
-            lg: { offset: 8, span: 8 }
-          }}
-          initialValues={{ remember: true }}
-          onFinish={onRegister}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Nombre"
-            name="firstname"
-            rules={[{ required: true, message: 'Nombre requerido para registro' }]}
+    <>
+      <Button type="secondary" shape="round" className='register-button' onClick={handleShow}>
+        Registrarme
+      </Button>
+
+      <Modal show={show} onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter" className="mx-auto">Nuevo Usuario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form
+            name="basic"
+            layout="vertical"
+            labelCol={{
+              xs: { span: 12 },
+              sm: { offset: 5, span: 14 },
+              md: { offset: 4, span: 16 }
+            }}
+            wrapperCol={{
+              xs: { span: 12 },
+              sm: { offset: 5, span: 14 },
+              md: { offset: 4, span: 16 }
+            }}
+            onValuesChange={formValues}
           >
-            <Input placeholder="Ingrese su nombre" />
-          </Form.Item>
-          <Form.Item
-            label="Apellido"
-            name="lastname"
-            rules={[{ required: true, message: 'Apellido requerido para registro' }]}
-          >
-            <Input placeholder="Ingrese su apellido" />
-          </Form.Item>
-          <Form.Item
-            label="Email de usuario"
-            name="username"
-            rules={[{ required: true, message: 'Email requerido para registro' }]}
-          >
-            <Input placeholder="Ingrese su e-mail" />
-          </Form.Item>
-          <Form.Item
-            label="Contraseña"
-            name="password"
-            rules={[{ required: true, message: 'Contraseña requerida para registro' }]}
-          >
-            <Input.Password placeholder="Ingrese su e-contraseña" />
-          </Form.Item>
-          <div className='registry-button-container'>
-            <Button type="primary" shape="round" htmlType="submit" className='registry-button'>
-              Confirmar Registro
-            </Button>
-          </div>
-        </Form>
+            <Form.Item
+              label="Email de usuario"
+              name="username"
+              rules={[{ required: true, message: 'Email requerido para registro' }]}
+            >
+              <Input placeholder="Ingrese su e-mail" />
+            </Form.Item>
+            <Form.Item
+              label="Contraseña (mínimo 6 caracteres)"
+              name="password"
+              rules={[{ required: true, message: 'Contraseña requerida para registro' }]}
+            >
+              <Input.Password placeholder="Ingrese su contraseña" />
+            </Form.Item>
+          </Form>
+          <div>
+        {showAlert ?
+          <Alert
+            message="Algo falló"
+            description="El usuario ya existe."
+            type="error"
+            showIcon
+            closable
+            onClose={closeAlert}
+          />
+          :
+          null
+        }
       </div>
-    </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="primary" shape="round" onClick={onRegister}>
+            Confirmar Registro
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   )
 }

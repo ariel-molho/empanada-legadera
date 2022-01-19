@@ -1,0 +1,9 @@
+#confirm-button{
+  color: black;
+  text-decoration: none;
+}
+
+#confirm-button:hover{
+  color: white;
+  text-decoration: none;
+}

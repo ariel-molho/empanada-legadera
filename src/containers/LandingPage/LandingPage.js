@@ -1,27 +1,45 @@
-import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Form, Input, Button, Alert } from 'antd';
 import 'antd/dist/antd.css';
 import './LandingPage.css';
 import Logo from '../../assets/empanada-legadera.jpg';
-import { Link } from "react-router-dom";
+import Register from '../Register/Register';
+import { loginUser } from '../../sevices/utils';
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
-  const [login, setLogin] = useState({
-    username: "",
-    password: ""
-  })
-  
-  const onFinish = (values) => {
-    console.log('Success:', values);
-    setLogin({
-      username: values.username,
-      password: values.password
-    })
+  let navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(false);
+
+  const onFinish = async (values) => {
+    const response = await loginUser(values.username, values.password);
+    if (response.hasOwnProperty("message")) {
+      // console.log(response.message);//para control
+      setShowAlert(true);
+    }
+    if (response.hasOwnProperty("user")) {
+      // console.log(response.user);//para control
+      navigate("/historial");
+    }
   };
+
+  const closeAlert = () => {
+    setShowAlert(false)
+  }
+
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setShowAlert(false);;
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showAlert])
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
   return (
     <div>
       <h1 className='login-title'>Empanada Legadera</h1>
@@ -69,11 +87,23 @@ export default function LandingPage() {
             </Button>
           </div>
           <div className='register-button-container'>
-            <Button type="secondary" shape="round" className='register-button'>
-            <Link to="/registro">Registrarme</Link>
-            </Button>
+            <Register />
           </div>
         </Form>
+      </div>
+      <div>
+        {showAlert ?
+          <Alert
+            message="Algo falló"
+            description="El usuario y/o contraseña son incorrectos."
+            type="error"
+            showIcon
+            closable
+            onClose={closeAlert}
+          />
+          :
+          null
+        }
       </div>
     </div>
   )

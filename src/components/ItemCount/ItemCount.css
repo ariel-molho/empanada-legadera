@@ -1,0 +1,20 @@
+.card-counter{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.card-confirm{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.visual{
+    border: 1px solid lightgray;
+    text-align: center;
+    font-size: .875rem;
+    padding: 0.25rem 0.5rem;
+}
