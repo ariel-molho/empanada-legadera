@@ -4,6 +4,7 @@ import ItemList from '../../components/ItemList/ItemList';
 import { CartContext } from '../../context/cartContext';
 import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthenticatedLayout as Layout } from "../_layout/authenticated/index";
 
 const { getItems } = require('../../sevices/utils');
 
@@ -22,8 +23,10 @@ export default function NewOrder() {
   }, [])
 
   return (
-    <Container>
+    <Layout>
+      <Container>
         {!isLoading ? <Loader /> : <ItemList data={data} />}
-    </Container>
+      </Container>
+    </Layout>
   )
 }

@@ -60,7 +60,9 @@ export const registerUser = async (registerEmail, registerPassword) => {
   ).catch(err => {
     return err;
   });
-  console.log(user);
+  // console.log(user);//para control
+  let token = ("Bearer " + user?.user.accessToken);
+  sessionStorage.setItem("token", JSON.stringify(token));
   return user
 };
 
@@ -72,15 +74,18 @@ export const loginUser = async (loginEmail, loginPassword) => {
   ).catch(err => {
     return err;
   });
-  console.log(user);
+  // console.log(user);//para control
+  let token = ("Bearer " + user?.user.accessToken);
+  sessionStorage.setItem("token", JSON.stringify(token));
   return user
 };
 
 export const logout = async () => {
   await signOut(auth);
+  sessionStorage.clear();
 };
 
 export const currentUser = onAuthStateChanged(auth, (currentUser) => {
-  console.log(currentUser);
+  // console.log(currentUser);//para control
   return currentUser;
 });
