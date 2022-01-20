@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../layout.css";
 export function UnauthenticatedLayout({ children }) {
   let navigate = useNavigate();
 
@@ -11,8 +11,11 @@ export function UnauthenticatedLayout({ children }) {
   }, [sessionStorage.getItem("token")]);
 
   return (
-    <>
+    <div>
       {children}
-    </>
+      <footer className="footer">
+        <p className="copyright">© Copyright 2022 AryApp - Todos los derechos reservados</p>
+      </footer>
+    </div>
   );
 }

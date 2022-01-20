@@ -63,6 +63,7 @@ export const registerUser = async (registerEmail, registerPassword) => {
   // console.log(user);//para control
   let token = ("Bearer " + user?.user.accessToken);
   sessionStorage.setItem("token", JSON.stringify(token));
+  sessionStorage.setItem("user", JSON.stringify(user?.user.email));
   return user
 };
 
@@ -74,9 +75,10 @@ export const loginUser = async (loginEmail, loginPassword) => {
   ).catch(err => {
     return err;
   });
-  // console.log(user);//para control
+  console.log(user);//para control
   let token = ("Bearer " + user?.user.accessToken);
   sessionStorage.setItem("token", JSON.stringify(token));
+  sessionStorage.setItem("user", JSON.stringify(user?.user.email));
   return user
 };
 

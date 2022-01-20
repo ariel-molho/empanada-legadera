@@ -7,6 +7,9 @@ import Register from '../Register/Register';
 import { loginUser } from '../../sevices/utils';
 import { useNavigate } from "react-router-dom";
 import { UnauthenticatedLayout as Layout } from "../_layout/unauthenticated/index";
+import { Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function LandingPage() {
   let navigate = useNavigate();
@@ -48,7 +51,7 @@ export default function LandingPage() {
         <div className='logo-img-container'>
           <img src={Logo} alt='Logo' className='logo-img' />
         </div>
-        <div>
+        <Container>
           <Form
             name="basic"
             layout="vertical"
@@ -92,7 +95,7 @@ export default function LandingPage() {
               <Register />
             </div>
           </Form>
-        </div>
+        </Container>
         <div>
           {showAlert ?
             <Alert

@@ -1,0 +1,21 @@
+.footer{
+  background-color: black;
+  width: 100%;
+  margin-top: 2rem;
+  position: fixed;
+  bottom: 0;
+}
+
+.copyright {
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  padding: .5rem 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 576px) {
+  .copyright{
+    font-size: 10px;
+  }
+}

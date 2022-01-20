@@ -1,0 +1,36 @@
+.history-title{
+  text-align: center;
+  margin: 2rem 0 0 0;
+  font-size: 3rem;
+  font-weight: normal;
+  font-style: italic;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.history-user{
+  text-align: center;
+  margin: 0 0 2rem 0;
+  font-size: 3rem;
+  font-weight: normal;
+  font-style: italic;
+  line-height: normal;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media screen and (max-width: 1023px) {
+  .history-title, .history-user{
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .history-title, .history-user{
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .history-title, .history-user{
+    font-size: 1.5rem;
+  }
+}
