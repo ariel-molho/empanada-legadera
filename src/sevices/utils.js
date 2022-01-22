@@ -1,5 +1,5 @@
 import { db, auth } from './firebase';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, query, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 export const getItems = async () => {
@@ -11,46 +11,52 @@ export const getItems = async () => {
   return docs;
 };
 
-export const saveOrder = (newOrder) =>
-  addDoc(collection(db, "orders"), newOrder);
+// export const getUserOrders = async (username) => {
+//   const querySnapshot = await query(collection(db, 'orders'), where("user", "==", username));
+//   const docs = [];
+//   querySnapshot.forEach((doc) => {
+//     docs.push({ ...doc.data(), id: doc.id });
+//   });
+//   return docs;
+// };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+// export const saveOrder = (newOrder) =>
+//   addDoc(collection(db, "orders"), newOrder);
 
-  //   if (!validURL(website.url))
-  //     return toast("invalid url", { type: "warning", autoClose: 1000 });
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
 
-  //   if (!params.id) {
-  //     await saveWebsite(website);
-  //     toast("New Link Added", {
-  //       type: "success",
-  //     });
-  //   } else {
-  //     await updateWebsite(params.id, website);
-  //     toast("Updated", {
-  //       type: "success",
-  //     });
-  //   }
+//   if (!validURL(website.url))
+//     return toast("invalid url", { type: "warning", autoClose: 1000 });
+
+//   if (!params.id) {
+//     await saveWebsite(website);
+//     toast("New Link Added", {
+//       type: "success",
+//     });
+//   } else {
+//     await updateWebsite(params.id, website);
+//     toast("Updated", {
+//       type: "success",
+//     });
+//   }
 
 // const itemCollection = db.collection("products");
 // const orderCollection = db.collection("orders");
 
 
-// export function createOrder(buyer, items, total) {
-//   return orderCollection
-//     .add({
-//       buyer: buyer,
-//       items: items,
-//       date: firebase.firestore.Timestamp.fromDate(new Date()),
-//       total: total,
-//     })
-//     .then(function (oderId) {
-//       return oderId.id;
-//     })
-//     .catch(function (error) {
-//       return error;
+// export function createOrder(username, items, total) {
+//   const order = await setDoc(doc(collection(db, 'orders'), {
+//     user: username,
+//     total: total,
+//     date: firebase.firestore.Timestamp.fromDate(new Date()),
+//     items: items
+//   }))
+//     .catch(err => {
+//       return err;
 //     });
-//   }  
+//   return order
+// }
 
 export const registerUser = async (registerEmail, registerPassword) => {
   const user = await createUserWithEmailAndPassword(
@@ -61,9 +67,11 @@ export const registerUser = async (registerEmail, registerPassword) => {
     return err;
   });
   // console.log(user);//para control
-  let token = ("Bearer " + user?.user.accessToken);
-  sessionStorage.setItem("token", JSON.stringify(token));
-  sessionStorage.setItem("user", JSON.stringify(user?.user.email));
+  if (user.user){
+    let token = ("Bearer " + user?.user?.accessToken);
+    sessionStorage.setItem("token", JSON.stringify(token));
+    sessionStorage.setItem("user", JSON.stringify(user?.user?.email));
+  }
   return user
 };
 
@@ -75,10 +83,12 @@ export const loginUser = async (loginEmail, loginPassword) => {
   ).catch(err => {
     return err;
   });
-  console.log(user);//para control
-  let token = ("Bearer " + user?.user.accessToken);
-  sessionStorage.setItem("token", JSON.stringify(token));
-  sessionStorage.setItem("user", JSON.stringify(user?.user.email));
+  // console.log(user);//para control
+  if (user.user){
+    let token = ("Bearer " + user?.user?.accessToken);
+    sessionStorage.setItem("token", JSON.stringify(token));
+    sessionStorage.setItem("user", JSON.stringify(user?.user?.email));
+  }
   return user
 };
 

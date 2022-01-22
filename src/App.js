@@ -2,7 +2,6 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from './containers/LandingPage/LandingPage';
-// import Register from './containers/Register/Register';
 import NotFound from './containers/NotFound/NotFound';
 import AppContextProvider from './context/cartContext';
 import NewOrder from './containers/NewOrder/NewOrder';
@@ -14,7 +13,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          {/* <Route exact path="/registro" element={<Register />} /> */}
           <Route path="/historial" element={<OrderHistory/>} />
           <Route path="/nuevo-pedido" element={<NewOrder/>} />
           <Route path="*" element={<NotFound />} />
@@ -32,6 +30,7 @@ https://github.com/FaztWeb/react-crud-firestore
 https://www.youtube.com/watch?v=9bXhf_TELP4&ab_channel=PedroTech
 https://github.com/machadop1407/react-firebase-authentication
 
+https://www.npmjs.com/package/dotenv ?
 test@gmail.com
 testpass1
 */

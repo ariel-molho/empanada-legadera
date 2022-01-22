@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDNK7sU7NHx9Y8gld38AWZSaJX1KSDP9Cw",
-  authDomain: "empanada-legadera.firebaseapp.com",
-  projectId: "empanada-legadera",
-  storageBucket: "empanada-legadera.appspot.com",
-  messagingSenderId: "842808661702",
-  appId: "1:842808661702:web:f26948fc4fd9206b8b69c7"
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID
 };
 
 // Initialize Firebase
