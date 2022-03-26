@@ -1,4 +1,4 @@
-.history-title{
+.history-title, .order-title, .admin-title{
   text-align: center;
   margin: 2rem 0 0 0;
   font-size: 3rem;
@@ -17,20 +17,41 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.admin-date-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.admin-date-select{
+  margin-right: 1rem;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 @media screen and (max-width: 1023px) {
-  .history-title, .history-user{
+  .history-title, .order-title, .admin-title, .history-user{
     font-size: 2.5rem;
   }
 }
 
 @media screen and (max-width: 991px) {
-  .history-title, .history-user{
+  .history-title, .order-title, .admin-title, .history-user{
     font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 576px) {
-  .history-title, .history-user{
+  .history-title, .order-title, .admin-title, .history-user{
     font-size: 1.5rem;
+  }
+  .admin-date-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .admin-date-select{
+    font-size: 0.75rem;
   }
 }

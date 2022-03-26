@@ -19,6 +19,14 @@ export default function ItemList({ data, cart, totalPrice }) {
     navigate("/historial");
   }
 
+  const cancelOrder = () => {
+    setShow({
+      hidden: false
+    });
+    clearCart();
+    
+  }
+
   return (
     <div>
       <Row xs={1} md={2} className="g-4">
@@ -33,6 +41,9 @@ export default function ItemList({ data, cart, totalPrice }) {
       <Row className="g-4">
         <Button hidden={!show.hidden} variant="warning" size="lg" id="confirm-button" onClick={confirmOrder}>
           Confirmar Pedido
+        </Button>
+        <Button hidden={!show.hidden} variant="danger" size="lg" id="confirm-button" onClick={cancelOrder}>
+          Limpiar Pedido
         </Button>
       </Row>
     </div>

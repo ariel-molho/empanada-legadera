@@ -6,6 +6,7 @@ import NotFound from './containers/NotFound/NotFound';
 import AppContextProvider from './context/cartContext';
 import NewOrder from './containers/NewOrder/NewOrder';
 import OrderHistory from './containers/OrderHistory/OrderHistory';
+import AdminPage from './containers/AdminPage/AdminPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/historial" element={<OrderHistory/>} />
           <Route path="/nuevo-pedido" element={<NewOrder/>} />
+          <Route path="/administrador" element={<AdminPage/> } />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
@@ -33,4 +35,6 @@ https://github.com/machadop1407/react-firebase-authentication
 https://www.npmjs.com/package/dotenv ?
 test@gmail.com
 testpass1
+arielmolho@gmail.com
+Monster1
 */

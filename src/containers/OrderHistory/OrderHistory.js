@@ -9,44 +9,16 @@ const { getOrdersByUser } = require('../../sevices/utils');
 
 export default function OrderHistory() {
   const [user, setUser] = useState();
-  const [orderHist, setOrderHist] = useState();
+  const [orders, setOrders] = useState();
+  const options = {year: "numeric", month: "long", day: "numeric"};
+
   useEffect(() => {
     setUser(JSON.parse(sessionStorage.getItem("user")))
-  }, [sessionStorage.getItem("user")])
+  }, []);//sessionStorage.getItem("user")
 
   useEffect(() => {
-    getOrdersByUser().then(res => {
-      console.log(res);
-      setOrderHist(res);
-    });
-  }, [])
-
-  const orders = [
-    {
-      key: '1',
-      date: '13-nov-2021',
-      total: 560,
-      orderDetail: [{ sabor: "Carne", cantidad: 2 }, { sabor: "Jamon y Queso", cantidad: 1 }, { sabor: "Pollo", cantidad: 1 }],
-    },
-    {
-      key: '2',
-      date: '1-feb-2022',
-      total: 420,
-      orderDetail: [{ sabor: "Carne", cantidad: 1 }, { sabor: "Jamon y Queso", cantidad: 2 }],
-    },
-    {
-      key: '3',
-      date: '20-sep-2022',
-      total: 420,
-      orderDetail: [{ sabor: "Carne", cantidad: 1 }, { sabor: "Jamon y Queso", cantidad: 2 }],
-    },
-    {
-      key: '4',
-      date: '04-abr-2021',
-      total: 560,
-      orderDetail: [{ sabor: "Carne", cantidad: 2 }, { sabor: "Queso y Cebolla", cantidad: 1 }, { sabor: "Humita", cantidad: 1 }],
-    },
-  ];
+    getOrdersByUser().then(res => setOrders(res));
+  }, []);
 
   return (
     <Layout>
@@ -62,7 +34,7 @@ export default function OrderHistory() {
           }
         </div>
         <Container>
-          {orderHist ?
+          {orders ?
             <Table striped bordered hover variant="dark">
               <thead>
                 <tr>
@@ -72,17 +44,17 @@ export default function OrderHistory() {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order, index) => {
+                {orders.map((order) => {
                   return (
-                    <tr key={index}>
-                      <td>{order.date}</td>
-                      <td>{order.total}</td>
+                    <tr key={order.id}>
+                      <td>{order.date.toDate().toLocaleDateString('es-AR', options)}</td>
+                      <td>$ {order.total}</td>
                       <td>
                         <ListGroup variant="flush">
                           {
-                            order?.orderDetail?.map((item, index) => {
+                            order?.items?.map((item, index) => {
                               return (
-                                <ListGroup.Item key={index} variant="dark">{item.sabor} x{item.cantidad}</ListGroup.Item>
+                                <ListGroup.Item key={index} variant="dark">{item.nombre} x{item.cantidad}</ListGroup.Item>
                               )
                             })
                           }

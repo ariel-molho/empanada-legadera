@@ -1,9 +1,9 @@
 import { db, auth } from './firebase';
-import { collection, getDocs, doc, setDoc, Timestamp, query, where} from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc, Timestamp, query, where } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 export const getItems = async () => {
-  const querySnapshot = await getDocs(collection(db, 'orders'));
+  const querySnapshot = await getDocs(collection(db, 'products'));
   const docs = [];
   querySnapshot.forEach((doc) => {
     docs.push({ ...doc.data(), id: doc.id });
@@ -12,7 +12,21 @@ export const getItems = async () => {
 };
 
 export const getOrdersByUser = async () => {
-  const q = query(collection(db, 'orders'), where('user', '==', JSON.parse(sessionStorage.getItem("user"))))
+  const q = query(collection(db, 'orders'), where('user', '==', JSON.parse(sessionStorage.getItem("user"))));
+  const querySnapshot = await getDocs(q);
+  const docs = [];
+  querySnapshot.forEach((doc) => {
+    docs.push({ ...doc.data(), id: doc.id });
+  });
+  return docs;
+};
+
+export const getOrdersByDate = async (date) => {
+  let startDate = new Date(`${date} 00:01`);
+  let endDate = new Date(`${date} 23:59`);
+  const q = query(collection(db, 'orders'), 
+    where('date', '>=', Timestamp.fromDate(startDate)),
+    where('date', '<=', Timestamp.fromDate(endDate)))
   const querySnapshot = await getDocs(q);
   const docs = [];
   querySnapshot.forEach((doc) => {
@@ -23,7 +37,7 @@ export const getOrdersByUser = async () => {
 
 export const createOrder = async (items, total) => {
   const order = await setDoc(doc(db, 'orders', `${Math.random().toString(36).substr(2, 9)}`), {
-    user: currentUser(),
+    user: JSON.parse(sessionStorage.getItem("user")),
     total: total,
     date: Timestamp.fromDate(new Date()),
     items: items

@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './ItemCount.css';
 import { Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { CartContext } from '../../context/cartContext';
 
 export default function ItemCount({ finalizar }) {
   const [number, setNumber] = useState(0);
   const [confirm, setConfirm] = useState(false);
+  const { cart } = useContext(CartContext);
+
+  useEffect(() => {
+    if(cart.length === 0){
+      setConfirm(false);
+    }
+  }, [cart])
 
   function onIncrement() {
     setNumber(number + 1)

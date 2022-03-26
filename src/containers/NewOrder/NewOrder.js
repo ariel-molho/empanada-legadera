@@ -5,6 +5,7 @@ import { CartContext } from '../../context/cartContext';
 import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthenticatedLayout as Layout } from "../_layout/authenticated/index";
+import "../OrderHistory/OrderHistory.css"
 
 const { getItems } = require('../../sevices/utils');
 
@@ -19,6 +20,9 @@ export default function NewOrder() {
 
   return (
     <Layout>
+      <div>
+        <h1 className='order-title'>Nuevo pedido</h1>
+      </div>
       <Container>
         {data ? <ItemList data={data} cart={cart} totalPrice={totalPrice} /> : <Loader />}
       </Container>
