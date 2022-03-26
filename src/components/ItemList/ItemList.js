@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import './ItemList.css';
 import Item from '../Item/Item';
 import { Button, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
+import { CartContext } from '../../context/cartContext';
 
-export default function ItemList({ data }) {
+const { createOrder } = require('../../sevices/utils');
+
+export default function ItemList({ data, cart, totalPrice }) {
   const [show, setShow] = useState(true);
   let navigate = useNavigate();
+  const { clearCart } = useContext(CartContext);
+
   const confirmOrder = () => {
+    createOrder(cart, parseInt(totalPrice));
+    clearCart();
     navigate("/historial");
   }
 

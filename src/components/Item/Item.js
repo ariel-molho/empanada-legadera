@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import './Item.css';
 import { Card, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,20 +15,19 @@ export default function Item({ data, setShow }) {
       hidden: true
     });
     cantidadCompra = cantidad;
-
     productSelected();
   }
 
   function productSelected() {
     const newItem = {
-      id: data[0].id,
-      categoria: data[0].category,
-      tipo: data[0].title,
-      precio: data[0].price,
+      id: data.id,
+      nombre: data.name,
+      precio: data.price,
       cantidad: cantidadCompra
     };
     addToCart(newItem);
   }
+
   return (
     <Col>
       <Card className="item-card">

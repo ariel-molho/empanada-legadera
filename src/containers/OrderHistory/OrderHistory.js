@@ -3,12 +3,23 @@ import "./OrderHistory.css"
 import { AuthenticatedLayout as Layout } from "../_layout/authenticated/index";
 import { Container, Table, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Loader from '../../components/Loader/Loader';
+
+const { getOrdersByUser } = require('../../sevices/utils');
 
 export default function OrderHistory() {
   const [user, setUser] = useState();
+  const [orderHist, setOrderHist] = useState();
   useEffect(() => {
     setUser(JSON.parse(sessionStorage.getItem("user")))
   }, [sessionStorage.getItem("user")])
+
+  useEffect(() => {
+    getOrdersByUser().then(res => {
+      console.log(res);
+      setOrderHist(res);
+    });
+  }, [])
 
   const orders = [
     {
@@ -51,36 +62,38 @@ export default function OrderHistory() {
           }
         </div>
         <Container>
-          <Table striped bordered hover variant="dark">
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Total en $</th>
-                <th>Pedido</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{order.date}</td>
-                    <td>{order.total}</td>
-                    <td>
-                      <ListGroup variant="flush">
-                        {
-                          order?.orderDetail?.map((item, index) => {
-                            return (
-                              <ListGroup.Item key={index} variant="dark">{item.sabor} x{item.cantidad}</ListGroup.Item>
-                            )
-                          })
-                        }
-                      </ListGroup>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </Table>
+          {orderHist ?
+            <Table striped bordered hover variant="dark">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Total en $</th>
+                  <th>Pedido</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{order.date}</td>
+                      <td>{order.total}</td>
+                      <td>
+                        <ListGroup variant="flush">
+                          {
+                            order?.orderDetail?.map((item, index) => {
+                              return (
+                                <ListGroup.Item key={index} variant="dark">{item.sabor} x{item.cantidad}</ListGroup.Item>
+                              )
+                            })
+                          }
+                        </ListGroup>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </Table>
+            : <Loader />}
         </Container>
       </div>
     </Layout>

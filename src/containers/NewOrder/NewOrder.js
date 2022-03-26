@@ -10,22 +10,17 @@ const { getItems } = require('../../sevices/utils');
 
 export default function NewOrder() {
   const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const { cart } = useContext(CartContext);
+  const { cart, totalPrice } = useContext(CartContext);
 
   useEffect(() => {
     getItems()
       .then(res => setData(res));
-    const timer = setTimeout(() => {
-      setIsLoading(true);
-    }, 1000);
-    return () => clearTimeout(timer);
   }, [])
 
   return (
     <Layout>
       <Container>
-        {!isLoading ? <Loader /> : <ItemList data={data} />}
+        {data ? <ItemList data={data} cart={cart} totalPrice={totalPrice} /> : <Loader />}
       </Container>
     </Layout>
   )
