@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AuthenticatedLayout as Layout } from "../_layout/authenticated/index";
-import Loader from '../../components/Loader/Loader';
 import { Container, Table, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../OrderHistory/OrderHistory.css"
@@ -18,7 +17,7 @@ export default function AdminPage() {
       setOrders(res);
     })
   }
-  
+
   return (
     <Layout>
       <div className='mb-4'>
@@ -63,9 +62,10 @@ export default function AdminPage() {
                     </tr>
                   )
                 })
-                : <tr>
-                  <td colSpan={4} style={{textAlign: "center"}} >No hay pedidos en la fecha seleccionada</td>
-                  </tr>
+                : 
+                <tr>
+                  <td colSpan={4} style={{ textAlign: "center" }} >No hay pedidos en la fecha seleccionada</td>
+                </tr>
               }
             </tbody>
           </Table>

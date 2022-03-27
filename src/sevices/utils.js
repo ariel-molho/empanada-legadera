@@ -1,5 +1,5 @@
 import { db, auth } from './firebase';
-import { collection, getDocs, doc, setDoc, Timestamp, query, where } from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc, Timestamp, query, where, deleteDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 export const getItems = async () => {
@@ -42,6 +42,15 @@ export const createOrder = async (items, total) => {
     date: Timestamp.fromDate(new Date()),
     items: items
   })
+    .catch(err => {
+      console.log(err);
+      return err;
+    });
+  return order
+}
+
+export const deleteOrder = async (orderId) => {
+  const order = await deleteDoc(doc(db, 'orders', orderId))
     .catch(err => {
       console.log(err);
       return err;
