@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/historial" element={<OrderHistory/>} />
           <Route path="/nuevo-pedido" element={<NewOrder/>} />
-          {(user === process.env.REACT_APP_ADMIN_USER) && <Route path="/administrador" element={<AdminPage/> } />}
+          {(user && user === process.env.REACT_APP_ADMIN_USER) && <Route path="/administrador" element={<AdminPage/> } />}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

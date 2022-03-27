@@ -4,10 +4,10 @@ El nombre del proyecto es Empanada Legadera y está hecho para practicar habilid
 
 ## Tech
 Para el proyecto se ha usado:
-- [ReactJS](https://reactjs.org/)
-- [React Bootstrap](https://react-bootstrap.github.io/)
-- [Ant Design](https://ant.design/)
-- [Firebase](https://firebase.google.com/) para backend (autenticación y base de datos)
+- [ReactJS](https://reactjs.org/).
+- [React Bootstrap](https://react-bootstrap.github.io/).
+- [Ant Design](https://ant.design/).
+- [Firebase](https://firebase.google.com/) para backend (autenticación y base de datos).
 
 ## Funcionalidad
 
@@ -16,12 +16,11 @@ Para los usuarios el proyecto cuenta con dos tabs en el nav bar:
 2. Nuevo Pedido: en esta pantalla el usuario puede hacer un nuevo pedido (path="/nuevo-pedido").
 Para estas pantallas el usuario debe haberse registrado o logueado previamente.
 También se cuenta con una pantalla 404.
-Para el administrador hay una pantalla adicional para ver todos los pedidos de todos los usuarios.
+3. Administrador: Para el administrador hay una pantalla adicional para ver todos los pedidos de todos los usuarios. Tiene un selector por fecha para filtrar la información.
 
 A futuro se planea:
-- En la pantalla de login (path="/") la funcionalidad de recuperar contraseña.
-- Para el administrador la posibilidad de linkear directo un nuevo pedido con el Whatsapp del restaurante.
+- Para el administrador la posibilidad de linkear directo un nuevo pedido con el Whatsapp del restaurante o alguna forma de exportar la info.
 
 ## Variables de Entorno
 
-Solicitar archivo .env con las variables de entorno (para linkear con Firebase).
+Solicitar archivo .env con las variables de entorno (para linkear con Firebase y permisos de administrador).

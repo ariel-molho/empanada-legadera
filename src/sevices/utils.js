@@ -1,6 +1,6 @@
 import { db, auth } from './firebase';
 import { collection, getDocs, doc, setDoc, Timestamp, query, where, deleteDoc } from 'firebase/firestore';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 
 export const getItems = async () => {
   const querySnapshot = await getDocs(collection(db, 'products'));
@@ -24,7 +24,7 @@ export const getOrdersByUser = async () => {
 export const getOrdersByDate = async (date) => {
   let startDate = new Date(`${date} 00:01`);
   let endDate = new Date(`${date} 23:59`);
-  const q = query(collection(db, 'orders'), 
+  const q = query(collection(db, 'orders'),
     where('date', '>=', Timestamp.fromDate(startDate)),
     where('date', '<=', Timestamp.fromDate(endDate)))
   const querySnapshot = await getDocs(q);
@@ -90,6 +90,14 @@ export const loginUser = async (loginEmail, loginPassword) => {
     sessionStorage.setItem("user", JSON.stringify(user?.user?.email));
   }
   return user
+};
+
+export const resetPassword = async (userEmail) => {
+  const user = await sendPasswordResetEmail(auth, userEmail)
+  .catch(err => {
+    return err;
+  });
+  return user;
 };
 
 export const logout = async () => {

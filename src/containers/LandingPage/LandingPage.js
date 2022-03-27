@@ -2,17 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Alert } from 'antd';
 import 'antd/dist/antd.css';
 import './LandingPage.css';
-import Logo from '../../assets/empanada-legadera.jpg';
-import Register from '../Register/Register';
-import { loginUser } from '../../sevices/utils';
-import { useNavigate } from "react-router-dom";
-import { UnauthenticatedLayout as Layout } from "../_layout/unauthenticated/index";
 import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Logo from '../../assets/empanada-legadera.jpg';
+import Register from '../Register/Register';
+import RecoverPassword from '../../components/RecoverPassword/RecoverPassword';
+import { loginUser } from '../../sevices/utils';
+import { UnauthenticatedLayout as Layout } from "../_layout/unauthenticated/index";
 
 export default function LandingPage() {
-  let navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
 
   const onFinish = async (values) => {
@@ -23,7 +21,7 @@ export default function LandingPage() {
     }
     if (response.hasOwnProperty("user")) {
       // console.log(response.user);//para control
-      navigate("/historial");
+      window.location = "/historial";
     }
   };
 
@@ -93,6 +91,9 @@ export default function LandingPage() {
             </div>
             <div className='register-button-container'>
               <Register />
+            </div>
+            <div className='reset-password-container'>
+              <RecoverPassword />
             </div>
           </Form>
         </Container>
