@@ -8,9 +8,11 @@ import Logo from '../../assets/empanada-legadera.jpg';
 import Register from '../Register/Register';
 import RecoverPassword from '../../components/RecoverPassword/RecoverPassword';
 import { loginUser } from '../../sevices/utils';
+import { useNavigate } from "react-router-dom";
 import { UnauthenticatedLayout as Layout } from "../_layout/unauthenticated/index";
 
 export default function LandingPage() {
+  let navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
 
   const onFinish = async (values) => {
@@ -21,7 +23,9 @@ export default function LandingPage() {
     }
     if (response.hasOwnProperty("user")) {
       // console.log(response.user);//para control
-      window.location = "/historial";
+      navigate("/historial");
+      // window.location.href = "/historial";
+      // setTimeout(() => {}, 1000);
     }
   };
 
