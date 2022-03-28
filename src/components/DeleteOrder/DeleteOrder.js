@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 const { deleteOrder } = require('../../sevices/utils');
 

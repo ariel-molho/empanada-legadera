@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Alert } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { resetPassword } from '../../sevices/utils';
@@ -39,7 +39,7 @@ export default function RecoverPassword() {
 
   return (
     <>
-      <a className='nav-link' onClick={handleShow}>¿Olvidaste tu contraseña?</a>
+      <Button type="link" onClick={handleShow}>¿Olvidaste tu contraseña?</Button>
 
       <Modal show={show} onHide={handleClose}
         backdrop="static"

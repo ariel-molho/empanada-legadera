@@ -53,7 +53,8 @@ export default function OrderHistory() {
                         <td>
                           <div className='total-delete-box'>
                             <span>$ {order.total}</span>
-                            <DeleteOrder orderId={order.id} />
+                            {(order.date.toDate().toLocaleDateString('es-AR', options) === new Date().toLocaleDateString('es-AR', options)) &&
+                              <DeleteOrder orderId={order.id} />}
                           </div>
                         </td>
                         <td>

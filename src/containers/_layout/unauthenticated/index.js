@@ -12,7 +12,7 @@ export function UnauthenticatedLayout({ children }) {
 
   return (
     <div>
-      {children}
+      <div className="main-cont">{children}</div>
       <footer className="footer">
         <p className="copyright">© Copyright 2022 AryApp - Todos los derechos reservados</p>
       </footer>

@@ -4,7 +4,7 @@ import { Container, Table, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../OrderHistory/OrderHistory.css"
 import { DatePicker } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 const { getOrdersByDate } = require('../../sevices/utils');
 

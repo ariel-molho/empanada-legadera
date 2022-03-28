@@ -1,3 +1,8 @@
+.main-cont{
+  min-height: 75vh;
+  padding-bottom: 5rem;
+}
+
 .footer{
   background-color: black;
   width: 100%;

@@ -19,7 +19,7 @@ export function AuthenticatedLayout({ children }) {
       {sessionStorage.getItem("token") ? (
         <div>
           <NavigatorBar />
-          <div>{children}</div>
+          <div className="main-cont">{children}</div>
           <footer className="footer">
             <p className="copyright">© Copyright 2022 AryApp - Todos los derechos reservados</p>
           </footer>

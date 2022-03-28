@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Alert } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Register.css';
