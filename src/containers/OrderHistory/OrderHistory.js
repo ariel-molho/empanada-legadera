@@ -14,11 +14,14 @@ export default function OrderHistory() {
   const options = { year: "numeric", month: "long", day: "numeric" };
 
   useEffect(() => {
-    setUser(JSON.parse(sessionStorage.getItem("user")))
-  }, []);//sessionStorage.getItem("user")
+    setUser(JSON.parse(sessionStorage.getItem("user")));
+  }, []);
 
   useEffect(() => {
-    getOrdersByUser().then(res => setOrders(res));
+    getOrdersByUser().then(res => {
+      const sortedActivities = res.sort((a, b) => b.date - a.date);
+      setOrders(sortedActivities);
+    } );
   }, []);
 
   return (

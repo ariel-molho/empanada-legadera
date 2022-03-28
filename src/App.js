@@ -9,8 +9,6 @@ import OrderHistory from './containers/OrderHistory/OrderHistory';
 import AdminPage from './containers/AdminPage/AdminPage';
 
 function App() {
-  // const user = JSON.parse(sessionStorage.getItem("user"));
-
   return (
     <AppContextProvider>
       <BrowserRouter>
@@ -19,7 +17,6 @@ function App() {
           <Route path="/historial" element={<OrderHistory/>} />
           <Route path="/nuevo-pedido" element={<NewOrder/>} />
           <Route path="/administrador" element={<AdminPage/> } />
-          {/* {(user && user === process.env.REACT_APP_ADMIN_USER) && <Route path="/administrador" element={<AdminPage/> } />} */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
