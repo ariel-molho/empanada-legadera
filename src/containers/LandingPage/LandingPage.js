@@ -24,8 +24,6 @@ export default function LandingPage() {
     if (response.hasOwnProperty("user")) {
       // console.log(response.user);//para control
       navigate("/historial");
-      // window.location.href = "/historial";
-      // setTimeout(() => {}, 1000);
     }
   };
 
