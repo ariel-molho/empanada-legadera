@@ -11,13 +11,34 @@ const { getOrdersByDate } = require('../../sevices/utils');
 
 export default function AdminPage() {
   const [orders, setOrders] = useState();
+  const [orderSum, setOrderSum] = useState();
   const [adminUser, setAdminUser] = useState(false);
   const options = { year: "numeric", month: "long", day: "numeric" };
 
   function onChange(date, dateString) {
     getOrdersByDate(dateString).then(res => {
+      console.log(res);
       setOrders(res);
+      summary(res);
     })
+  }
+
+  function summary(res) {
+    let orderSummary = [];
+    for (let i = 0; i < res.length; i++) {
+      for (let j = 0; j < res[i].items.length; j++) {
+        if (orderSummary.some(x => x.nombre === res[i].items[j].nombre)) {
+          let objIndex = orderSummary.findIndex((obj => obj.nombre === res[i].items[j].nombre));
+          orderSummary[objIndex].cantidad += res[i].items[j].cantidad;
+        } else {
+          orderSummary.push({
+            nombre: res[i].items[j].nombre,
+            cantidad: res[i].items[j].cantidad
+          })
+        }
+      }
+    }
+    setOrderSum(orderSummary);
   }
 
   useEffect(() => {
@@ -41,7 +62,7 @@ export default function AdminPage() {
           </Container>
           <Container>
             {orders &&
-              <Table striped bordered hover variant="dark">
+              <Table striped bordered hover responsive="sm" variant="dark">
                 <thead>
                   <tr>
                     <th>Fecha</th>
@@ -79,6 +100,24 @@ export default function AdminPage() {
                   }
                 </tbody>
               </Table>
+            }
+          </Container>
+          <Container>
+            {orderSum &&
+              <>
+                <div className='admin-date-container'>
+                  <h6 className='admin-date-select'>Resumen de pedido:</h6>
+                </div>
+                <ListGroup>
+                  {
+                    orderSum?.map((item, index) => {
+                      return (
+                        <ListGroup.Item key={index}>{item.nombre} x{item.cantidad}</ListGroup.Item>
+                      )
+                    })
+                  }
+                </ListGroup>
+              </>
             }
           </Container>
         </Layout >
