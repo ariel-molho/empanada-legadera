@@ -6,6 +6,7 @@ import "../OrderHistory/OrderHistory.css"
 import { DatePicker } from 'antd';
 import 'antd/dist/antd.min.css';
 import NotFound from '../NotFound/NotFound';
+import DeleteOrder from '../../components/DeleteOrder/DeleteOrder';
 
 const { getOrdersByDate } = require('../../sevices/utils');
 
@@ -78,7 +79,12 @@ export default function AdminPage() {
                         <tr key={order.id}>
                           <td>{order.date.toDate().toLocaleDateString('es-AR', options)}</td>
                           <td>{order.user}</td>
-                          <td>$ {order.total}</td>
+                          <td>
+                            <div className='total-delete-box'>
+                              <span>$ {order.total}</span>
+                              <DeleteOrder orderId={order.id} />
+                            </div>
+                          </td>
                           <td>
                             <ListGroup variant="flush">
                               {

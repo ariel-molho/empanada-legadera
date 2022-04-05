@@ -25,3 +25,14 @@
   width: 110px;
   margin: .5rem 0;
 }
+
+@media screen and (max-width: 576px) {
+  .login-title{
+    font-size: 2rem;
+  }
+  
+  .logo-img{
+    width: 125px;
+    height: 125px;
+  }
+}
