@@ -100,7 +100,6 @@ export const loginUserWithGoogle = async () => {
     .catch(err => {
       return err;
     });
-  console.log(user);//para control
   if (user.user) {
     let token = ("Bearer " + user?.user?.accessToken);
     sessionStorage.setItem("token", JSON.stringify(token));

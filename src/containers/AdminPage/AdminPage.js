@@ -44,7 +44,7 @@ export default function AdminPage() {
 
     let messageIntro = "https://api.whatsapp.com/send/?phone=5491135637041&text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20empanadas%3A%0A"
     let messageBody = "";
-    orderSummary.map((order) => {
+    orderSummary?.map((order) => {
       return messageBody = messageBody + `${order.nombre.replaceAll(' ', '')}%20x${order.cantidad}%0A`
     })
     const sum = orderSummary.reduce((accumulator, object) => {
@@ -85,7 +85,7 @@ export default function AdminPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.length > 0 ?
+                  {orders?.length > 0 ?
                     orders.map((order) => {
                       return (
                         <tr key={order.id}>
@@ -121,7 +121,7 @@ export default function AdminPage() {
             }
           </Container>
           <Container>
-            {orders.length > 0 && orderSum &&
+            {orders?.length > 0 && orderSum &&
               <>
                 <div className='admin-date-container'>
                   <h6 className='admin-date-select'>Resumen de pedido:</h6>
@@ -138,7 +138,7 @@ export default function AdminPage() {
               </>
             }
           </Container>
-          {orders.length > 0 && whatsAppMessage &&
+          {orders?.length > 0 && whatsAppMessage &&
             <div className='social-media-container'>
               <a href={whatsAppMessage} target="_blank" rel="noreferrer">
                 <WhatsAppOutlined style={{ color: "#25D366", fontSize: "3rem" }} />
