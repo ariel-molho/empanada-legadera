@@ -29,7 +29,7 @@ export default function Item({ data, setShow }) {
   }
 
   return (
-    <Col>
+    <Col data-testid={`item-${data.id}`} >
       <Card className="item-card">
         <Card.Body>
           <Card.Text>{data.name}</Card.Text>

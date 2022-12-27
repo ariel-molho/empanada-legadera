@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Loader() {
   return (
-    <div>
+    <div data-testid={"loader"} >
       <Container>
         <Row
           className="d-flex justify-content-center align-items-center"
