@@ -3,17 +3,6 @@ import { Container, Row, Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Loader() {
-  //falta el estado que marca si se activa o no el spinner.
-  /*
-  const [loading] = useAxiosLoader();
-    <>
-      {
-          loading ? 
-          <div className="loading"></div> : null
-      }
-    </>
-  */
-
   return (
     <div>
       <Container>
