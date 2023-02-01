@@ -12,14 +12,22 @@ const { getItems } = require('../../sevices/utils');
 export default function NewOrder() {
   const [data, setData] = useState();
   const { cart, totalPrice } = useContext(CartContext);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    getItems()
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    setIsLoading(true)
+    await getItems()
       .then(res => {
         let filteredData = res.filter(x => x.active)
+        console.log(filteredData)
         setData(filteredData)
       });
-  }, [])
+    setIsLoading(false)
+  }
 
   return (
     <Layout>
@@ -27,7 +35,12 @@ export default function NewOrder() {
         <h1 className='order-title'>Nuevo pedido</h1>
       </div>
       <Container>
-        {data ? <ItemList data={data} cart={cart} totalPrice={totalPrice} /> : <Loader />}
+        {isLoading && <Loader />}
+        {!isLoading && data?.length > 0 ?
+          <ItemList data={data} cart={cart} totalPrice={totalPrice} />
+          :
+          <h3 className='no-data'>No hay productos disponibles</h3>
+        }
       </Container>
     </Layout>
   )
