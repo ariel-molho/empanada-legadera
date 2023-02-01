@@ -15,7 +15,10 @@ export default function NewOrder() {
 
   useEffect(() => {
     getItems()
-      .then(res => setData(res));
+      .then(res => {
+        let filteredData = res.filter(x => x.active)
+        setData(filteredData)
+      });
   }, [])
 
   return (
