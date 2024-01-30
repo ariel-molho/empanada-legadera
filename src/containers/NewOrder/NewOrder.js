@@ -5,29 +5,28 @@ import { CartContext } from '../../context/cartContext';
 import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthenticatedLayout as Layout } from "../_layout/authenticated/index";
-import "../OrderHistory/OrderHistory.css"
+import "../OrderHistory/OrderHistory.css";
 
 const { getItems } = require('../../sevices/utils');
 
 export default function NewOrder() {
   const [data, setData] = useState();
   const { cart, totalPrice } = useContext(CartContext);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     await getItems()
       .then(res => {
-        let filteredData = res.filter(x => x.active)
-        console.log(filteredData)
-        setData(filteredData)
+        let filteredData = res.filter(x => x.active);
+        setData(filteredData);
       });
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   return (
     <Layout>
@@ -43,5 +42,5 @@ export default function NewOrder() {
         }
       </Container>
     </Layout>
-  )
+  );
 }
